@@ -148,8 +148,9 @@ class ailab_OmniGen:
 
     def _cleanup_temp_dir(self):
         """Clean up temporary directory"""
-        if hasattr(self, '_temp_dir') and osp.exists(self._temp_dir):
-            shutil.rmtree(self._temp_dir)
+        # if hasattr(self, '_temp_dir') and osp.exists(self._temp_dir):
+        #     shutil.rmtree(self._temp_dir)
+        shutil.rmtree(Paths.TMP_DIR)
 
     def _auto_select_precision(self):
         """Automatically select precision based on available VRAM"""
