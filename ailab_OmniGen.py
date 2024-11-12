@@ -1,4 +1,3 @@
-import sys
 import os.path as osp
 import os
 import torch
@@ -11,6 +10,7 @@ import tempfile
 import shutil
 import json
 import uuid
+import sys
 
 # Define all path constants
 class Paths:
@@ -116,24 +116,24 @@ class ailab_OmniGen:
                 else:
                     raise RuntimeError(f"Failed to download FP8 model: {response.status_code}")
             
-            # Check if FP16 model exists
-            if not osp.exists(Paths.MODEL_FILE_FP16):
-                print("FP16 model not found, starting download from Hugging Face...")
-                snapshot_download(
-                    repo_id="silveroxides/OmniGen-V1",
-                    local_dir=Paths.OMNIGEN_DIR,
-                    local_dir_use_symlinks=False,
-                    resume_download=True,
-                    token=None,
-                    tqdm_class=None,
-                )
-                print("FP16 model downloaded successfully")
+            # # Check if FP16 model exists
+            # if not osp.exists(Paths.MODEL_FILE_FP16):
+            #     print("FP16 model not found, starting download from Hugging Face...")
+            #     snapshot_download(
+            #         repo_id="silveroxides/OmniGen-V1",
+            #         local_dir=Paths.OMNIGEN_DIR,
+            #         local_dir_use_symlinks=False,
+            #         resume_download=True,
+            #         token=None,
+            #         tqdm_class=None,
+            #     )
+            #     print("FP16 model downloaded successfully")
             
             # Verify model files exist after download
             if model_precision == "FP8" and not osp.exists(Paths.MODEL_FILE_FP8):
                 raise RuntimeError("FP8 model download failed")
-            if not osp.exists(Paths.MODEL_FILE_FP16):
-                raise RuntimeError("FP16 model download failed")
+            # if not osp.exists(Paths.MODEL_FILE_FP16):
+            #     raise RuntimeError("FP16 model download failed")
                 
             print("OmniGen models verified successfully")
             
